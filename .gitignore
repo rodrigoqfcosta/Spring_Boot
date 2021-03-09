@@ -14,14 +14,6 @@ local.properties
 .loadpath
 .recommenders
 
-### vscode ###
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-*.code-workspace
-
 # External tool builders
 .externalToolBuilders/
 
@@ -101,6 +93,7 @@ local.properties
 hs_err_pid*
 
 ### Maven ###
+target/*
 target/
 pom.xml.tag
 pom.xml.releaseBackup
@@ -110,8 +103,10 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
+
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar
+.mvn/*
 
 HELP.md
 target/
@@ -146,5 +141,11 @@ build/
 
 ### VS Code ###
 .vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
 
 # End of https://www.toptal.com/developers/gitignore/api/maven,java,eclipse
