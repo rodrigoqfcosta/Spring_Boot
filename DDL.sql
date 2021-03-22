@@ -1,10 +1,12 @@
-create schema condominio;
+create database condominio
+default character set utf8
+default collate utf8_general_ci;
 
 use condominio;
 
-user 'user'@'localhost' identified by 'user123';
+create user rodrigo@localhost identified by 'user123';
 
-grant select, insert, delete, update on condominio.* to user;
+grant select, insert, delete, update on condominio.* to rodrigo@localhost;
 
 create table usr_usuario (
   usr_id bigint unsigned not null auto_increment,
