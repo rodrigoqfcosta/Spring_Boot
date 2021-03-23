@@ -1,32 +1,42 @@
-create database condominio
-default character set utf8
-default collate utf8_general_ci;
+create database condominio;
 
 use condominio;
 
-create user rodrigo@localhost identified by 'user123';
+create user 'user'@'localhost' identified by 'pass123';
 
-grant select, insert, delete, update on condominio.* to rodrigo@localhost;
+grant select, insert, delete, update on condominio.* to 'user'@'localhost';
 
-create table usr_usuario (
-  usr_id bigint unsigned not null auto_increment,
-  usr_nome varchar(20) not null,
-  usr_senha varchar(50) not null,
-  primary key (usr_id),
-  unique key uni_usuario_nome (usr_nome)
+CREATE TABLE IF NOT EXISTS apartamentos (
+  ap_id BIGINT NOT NULL AUTO_INCREMENT,
+  ap_unidade VARCHAR(10) NOT NULL,
+  ap_garagem INT NOT NULL,
+  PRIMARY KEY (ap_id),
+  UNIQUE KEY uni_apartamento_unidade (ap_unidade)
 );
 
-create table aut_autorizacao (
-  aut_id bigint unsigned not null auto_increment,
-  aut_nome varchar(20) not null,
-  primary key (aut_id),
-  unique key uni_aut_nome (aut_nome)
+CREATE TABLE IF NOT EXISTS moradores (
+  mor_id BIGINT NOT NULL AUTO_INCREMENT,
+  mor_nome VARCHAR(45) NULL,
+  mor_telefone VARCHAR(15) NULL,
+  mor_senha VARCHAR(45) NOT NULL,
+  PRIMARY KEY (mor_id),
+  UNIQUE KEY uni_morador_nome (mor_nome)
 );
 
-create table uau_usuario_autorizacao (
-  usr_id bigint unsigned not null,
-  aut_id bigint unsigned not null,
-  primary key (usr_id, aut_id),
-  foreign key aut_usuario_fk (usr_id) references usr_usuario (usr_id) on delete restrict on update cascade,
-  foreign key aut_autorizacao_fk (aut_id) references aut_autorizacao (aut_id) on delete restrict on update cascade
+CREATE TABLE IF NOT EXISTS condominio.moradores_in_apartamentos (
+  ap_id BIGINT NOT NULL,
+  mor_id BIGINT NOT NULL,
+  PRIMARY KEY (ap_id, mor_id),
+  INDEX fk_apartamentos_in_moradores_mor_id (mor_id) VISIBLE,
+  INDEX fk_apartamentos_in_moradores_ap_id (ap_id) VISIBLE,
+  CONSTRAINT fk_apartamentos_in_moradores_ap
+    FOREIGN KEY (ap_id)
+    REFERENCES apartamentos (ap_id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_apartamentos_in_moradores_mor
+    FOREIGN KEY (mor_id)
+    REFERENCES moradores (mor_id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
 );
