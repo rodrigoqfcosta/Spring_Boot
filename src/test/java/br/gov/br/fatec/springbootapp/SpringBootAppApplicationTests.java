@@ -28,28 +28,33 @@ class SpringBootAppApplicationTests {
 	}
 
     @Test
-    void testInsercao() {
+    void testInsercaoMorador() {
         Morador morador = new Morador();
         morador.setNome("Usuario Teste");
         morador.setTelefone("(12)91234-5678");
         morador.setSenha("pass123");
         moradorRep.save(morador);
         assertNotNull(morador.getId());
+    }
 
-        Apartamento ap = new Apartamento();
-        ap.setUnidade("A13");
-        ap.setGaragem(42);
-        apartamentoRep.save(ap);
-        assertNotNull(ap.getId());
+    @Test
+    void testInsercaoApartamento() {
+        Apartamento apartamento = new Apartamento();
+        apartamento.setUnidade("B99");
+        apartamento.setGaragem(999);
+        apartamentoRep.save(apartamento);
+        assertNotNull(apartamento.getId());
     }
 
     @Test
     void testMoradorInApartamento() {
-        Apartamento apartamento = apartamentoRep.findById(2L).get();
-        assertEquals(2, apartamento.getMoradores().iterator().next().getId());
+        Morador morador = moradorRep.findById(1L).get();
+        assertEquals("A01", morador.getApartamentos().iterator().next().getUnidade());
+    }
 
-        Morador morador = moradorRep.findById(2L).get();
-        assertEquals("B13", morador.getApartamentos().iterator().next().getUnidade());
-
+    @Test
+    void testApartamentoInMorador() {
+        Apartamento apartamento = apartamentoRep.findById(1L).get();
+        assertEquals("User Test", apartamento.getMoradores().iterator().next().getNome());
     }
 }
