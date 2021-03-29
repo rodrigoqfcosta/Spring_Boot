@@ -26,6 +26,7 @@ public class Morador {
     @Column(name = "mor_senha")
     private String senha;
 
+
     public Long getId() {
         return this.id;
     }

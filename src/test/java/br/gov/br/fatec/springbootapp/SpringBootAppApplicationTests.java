@@ -41,7 +41,5 @@ class SpringBootAppApplicationTests {
         ap.setGaragem(42);
         apartamentoRep.save(ap);
         assertNotNull(ap.getId());
-
     }
-
 }
