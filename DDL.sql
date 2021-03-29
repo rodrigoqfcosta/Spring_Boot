@@ -2,9 +2,9 @@ create database condominio;
 
 use condominio;
 
-create user 'user'@'localhost' identified by 'pass123';
+create user 'adm'@'localhost' identified by 'pass123';
 
-grant select, insert, delete, update on condominio.* to 'user'@'localhost';
+grant select, insert, delete, update on condominio.* to adm@localhost;
 
 CREATE TABLE IF NOT EXISTS apartamentos (
   ap_id BIGINT NOT NULL AUTO_INCREMENT,
