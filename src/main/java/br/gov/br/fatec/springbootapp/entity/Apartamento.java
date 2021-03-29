@@ -55,6 +55,7 @@ public class Apartamento {
     public void setGaragem(Integer garagem) {
         this.garagem = garagem;
     }
+    
     public Set<Morador> getMoradores() {
         return this.moradores;
     }

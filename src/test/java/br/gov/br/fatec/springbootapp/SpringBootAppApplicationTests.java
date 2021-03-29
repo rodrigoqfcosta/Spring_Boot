@@ -28,7 +28,7 @@ class SpringBootAppApplicationTests {
 	}
 
     @Test
-    void testaInsercao() {
+    void testInsercao() {
         Morador morador = new Morador();
         morador.setNome("Usuario Teste");
         morador.setTelefone("(12)91234-5678");
@@ -41,5 +41,15 @@ class SpringBootAppApplicationTests {
         ap.setGaragem(42);
         apartamentoRep.save(ap);
         assertNotNull(ap.getId());
+    }
+
+    @Test
+    void testMoradorInApartamento() {
+        Apartamento apartamento = apartamentoRep.findById(2L).get();
+        assertEquals(2, apartamento.getMoradores().iterator().next().getId());
+
+        Morador morador = moradorRep.findById(2L).get();
+        assertEquals("B13", morador.getApartamentos().iterator().next().getUnidade());
+
     }
 }

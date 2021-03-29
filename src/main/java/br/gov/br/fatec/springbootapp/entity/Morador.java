@@ -1,10 +1,14 @@
 package br.gov.br.fatec.springbootapp.entity;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 
@@ -26,6 +30,8 @@ public class Morador {
     @Column(name = "mor_senha")
     private String senha;
 
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "moradores")
+    private Set<Apartamento> apartamento;
 
     public Long getId() {
         return this.id;
@@ -53,5 +59,12 @@ public class Morador {
     }
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public Set<Apartamento> getApartamentos() {
+        return this.apartamento;
+    }
+    public void setApartamentos(Set<Apartamento> apartamento) {
+        this.apartamento = apartamento;
     }
 }

@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS moradores (
   UNIQUE KEY uni_morador_nome (mor_nome)
 );
 
-CREATE TABLE IF NOT EXISTS condominio.moradores_in_apartamentos (
+CREATE TABLE IF NOT EXISTS moradores_in_apartamentos (
   ap_id BIGINT NOT NULL,
   mor_id BIGINT NOT NULL,
   PRIMARY KEY (ap_id, mor_id),
