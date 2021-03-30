@@ -79,14 +79,20 @@ class SpringBootAppApplicationTests {
     }
 
     @Test
-    void testBuscaMoradorSenha() {
+    void testBuscaMoradorNomeSenha() {
         Morador morador = moradorRep.findByNomeAndSenha("Rodrigo Querino", "pass123");
         assertNotNull(morador);
     }
 
     @Test
-    void testUnidade() {
+    void testApartamentoUnidade() {
         Apartamento ap = apartamentoRep.findByUnidade("B13");
         assertNotNull(ap);
+    }
+
+    @Test
+    void testBuscaMoradorApartamento() {
+        List<Morador> morador = moradorRep.findByApartamentoUnidade("B13");
+        assertNotNull(morador);
     }
 }
