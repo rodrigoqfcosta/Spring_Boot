@@ -30,7 +30,7 @@ public class Morador {
     @Column(name = "mor_senha")
     private String senha;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "moradores")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "morador")
     private Set<Apartamento> apartamento;
 
     public Long getId() {

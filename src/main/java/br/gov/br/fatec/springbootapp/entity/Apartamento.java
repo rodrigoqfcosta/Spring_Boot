@@ -33,7 +33,7 @@ public class Apartamento {
     @JoinTable(name = "moradores_in_apartamentos", 
         joinColumns = { @JoinColumn(name = "ap_id")},
         inverseJoinColumns = { @JoinColumn(name = "mor_id")})
-    private Set<Morador> moradores;
+    private Set<Morador> morador;
 
     public Long getId() {
         return this.id;
@@ -56,10 +56,10 @@ public class Apartamento {
         this.garagem = garagem;
     }
     
-    public Set<Morador> getMoradores() {
-        return this.moradores;
+    public Set<Morador> getMorador() {
+        return this.morador;
     }
-    public void setMoradores(Set<Morador> moradores) {
-        this.moradores = moradores;
+    public void setMoradores(Set<Morador> morador) {
+        this.morador = morador;
     }
 }

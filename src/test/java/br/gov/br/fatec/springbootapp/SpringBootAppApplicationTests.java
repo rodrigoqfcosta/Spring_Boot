@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.HashSet;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -63,5 +64,29 @@ class SpringBootAppApplicationTests {
         morador.getApartamentos().add(apartamento);
         moradorRep.save(morador);
         assertNotNull(morador.getApartamentos().iterator().next().getId());
+    }
+
+    @Test
+    void testBuscaMoradorNomeContains() {
+        List<Morador> morador = moradorRep.findByNomeContainsIgnoreCase("G");
+        assertFalse(morador.isEmpty());
+    }
+
+    @Test
+    void testBuscaMoradorNome() {
+        Morador morador = moradorRep.findByNome("Rodrigo Querino");
+        assertNotNull(morador);
+    }
+
+    @Test
+    void testBuscaMoradorSenha() {
+        Morador morador = moradorRep.findByNomeAndSenha("Rodrigo Querino", "pass123");
+        assertNotNull(morador);
+    }
+
+    @Test
+    void testUnidade() {
+        Apartamento ap = apartamentoRep.findByUnidade("B13");
+        assertNotNull(ap);
     }
 }
