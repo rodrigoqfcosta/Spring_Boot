@@ -13,7 +13,9 @@ public interface MoradorRepository extends JpaRepository<Morador, Long>{
 
     public Morador findByCpf(String cpf);
 
-    public Morador findByNomeAndSenha(String nome, String senha);
+    public Morador findByNomeAndCpf(String nome, String cpf);
+
+    public Morador findByCpfAndSenha(String cpf, String senha);
 
     public List<Morador> findByApartamentosUnidade(String unidade);
 

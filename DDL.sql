@@ -42,3 +42,8 @@ CREATE TABLE IF NOT EXISTS moradores_in_apartamentos (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 );
+
+insert into moradores(mor_cpf, mor_nome, mor_telefone, mor_email, mor_senha)
+value ('12345678900', 'Usuario Teste', '(12)91234-5678', 'user@test.com', 'pass123');
+insert into apartamentos(ap_unidade, ap_garagem) value ('A00', 0);
+insert into moradores_in_apartamentos values (1, 1);

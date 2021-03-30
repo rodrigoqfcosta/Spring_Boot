@@ -34,8 +34,10 @@ class SpringBootAppApplicationTests {
     @Test
     void testInsercaoMorador() {
         Morador morador = new Morador();
-        morador.setNome("User Teste");
+        morador.setCpf("1234567890x");
+        morador.setNome("Teste Unitario");
         morador.setTelefone("(12)91234-5678");
+        morador.setEmail("testUnitario@test.com");
         morador.setSenha("pass123");
         moradorRep.save(morador);
         assertNotNull(morador.getId());
@@ -57,8 +59,10 @@ class SpringBootAppApplicationTests {
         apartamento.setGaragem(99);
         apartamentoRep.save(apartamento);
         Morador morador = new Morador();
-        morador.setNome("User Teste");
+        morador.setCpf("1234567890x");
+        morador.setNome("Teste Unitario");
         morador.setTelefone("(12)91234-5678");
+        morador.setEmail("testUnitario@test.com");
         morador.setSenha("pass123");
         morador.setApartamentos(new HashSet<Apartamento>());
         morador.getApartamentos().add(apartamento);
@@ -68,31 +72,37 @@ class SpringBootAppApplicationTests {
 
     @Test
     void testBuscaMoradorNomeContains() {
-        List<Morador> morador = moradorRep.findByNomeContainsIgnoreCase("G");
+        List<Morador> morador = moradorRep.findByNomeContainsIgnoreCase("S");
         assertFalse(morador.isEmpty());
     }
 
     @Test
     void testBuscaMoradorNome() {
-        Morador morador = moradorRep.findByNome("Rodrigo Querino");
+        Morador morador = moradorRep.findByNome("Usuario Teste");
         assertNotNull(morador);
     }
 
     @Test
-    void testBuscaMoradorNomeSenha() {
-        Morador morador = moradorRep.findByNomeAndSenha("Rodrigo Querino", "pass123");
+    void testBuscaMoradorCpf() {
+        Morador morador = moradorRep.findByCpf("12345678900");
         assertNotNull(morador);
     }
 
     @Test
-    void testApartamentoUnidade() {
-        Apartamento ap = apartamentoRep.findByUnidade("B13");
-        assertNotNull(ap);
+    void testBuscaMoradorNomeCpf() {
+        Morador morador = moradorRep.findByNomeAndCpf("Usuario Teste", "12345678900");
+        assertNotNull(morador);
     }
 
     @Test
-    void testBuscaMoradorApartamento() {
-        Morador morador = moradorRep.findByCpf("cpf");
+    void testBuscaMoradorCpfSenha() {
+        Morador morador = moradorRep.findByCpfAndSenha("12345678900", "pass123");
+        assertNotNull(morador);
+    }
 
+    @Test
+    void testBuscaMoradorUnidade() {
+        List<Morador> morador = moradorRep.findByApartamentosUnidade("A00");
+        assertFalse(morador.isEmpty());
     }
 }

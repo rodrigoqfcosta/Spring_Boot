@@ -46,6 +46,13 @@ public class Morador {
         this.id = id;
     }
 
+    public String getCpf() {
+        return this.cpf;
+    }
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
     public String getNome() {
         return this.nome;
     }
@@ -58,6 +65,13 @@ public class Morador {
     }
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getSenha() {
