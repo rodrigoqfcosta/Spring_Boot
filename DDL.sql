@@ -16,11 +16,13 @@ CREATE TABLE IF NOT EXISTS apartamentos (
 
 CREATE TABLE IF NOT EXISTS moradores (
   mor_id BIGINT NOT NULL AUTO_INCREMENT,
-  mor_nome VARCHAR(45) NULL,
+  mor_cpf VARCHAR(11) NOT NULL,
+  mor_nome VARCHAR(45) NOT NULL,
   mor_telefone VARCHAR(15) NULL,
+  mor_email VARCHAR(45) NULL,
   mor_senha VARCHAR(45) NOT NULL,
   PRIMARY KEY (mor_id),
-  UNIQUE KEY uni_morador_nome (mor_nome)
+  UNIQUE KEY uni_morador_cpf (mor_cpf)
 );
 
 CREATE TABLE IF NOT EXISTS moradores_in_apartamentos (
