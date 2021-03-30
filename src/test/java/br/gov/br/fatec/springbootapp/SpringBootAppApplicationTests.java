@@ -92,7 +92,7 @@ class SpringBootAppApplicationTests {
 
     @Test
     void testBuscaMoradorApartamento() {
-        List<Morador> morador = moradorRep.findByApartamentoUnidade("B13");
-        assertNotNull(morador);
+        Morador morador = moradorRep.findByCpf("cpf");
+
     }
 }

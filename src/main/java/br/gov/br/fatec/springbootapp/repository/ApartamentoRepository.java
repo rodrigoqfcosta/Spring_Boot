@@ -12,5 +12,5 @@ public interface ApartamentoRepository extends JpaRepository<Apartamento, Long>{
 
     public Apartamento findByGaragem(Integer garagem);
 
-    public List<Apartamento> findByMoradorApartamento(String morador);
+    public List<Apartamento> findByMoradoresApartamentos(String nome);
 }

@@ -21,17 +21,23 @@ public class Morador {
     @Column(name = "mor_id")
     private Long id;
     
+    @Column(name = "mor_cpf")
+    private String cpf;
+
     @Column(name = "mor_nome")
     private String nome;
 
     @Column(name = "mor_telefone")
     private String telefone;
 
+    @Column(name = "mor_email")
+    private String email;
+
     @Column(name = "mor_senha")
     private String senha;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "morador")
-    private Set<Apartamento> apartamento;
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "moradores")
+    private Set<Apartamento> apartamentos;
 
     public Long getId() {
         return this.id;
@@ -62,9 +68,9 @@ public class Morador {
     }
 
     public Set<Apartamento> getApartamentos() {
-        return this.apartamento;
+        return this.apartamentos;
     }
-    public void setApartamentos(Set<Apartamento> apartamento) {
-        this.apartamento = apartamento;
+    public void setApartamentos(Set<Apartamento> apartamentos) {
+        this.apartamentos = apartamentos;
     }
 }
