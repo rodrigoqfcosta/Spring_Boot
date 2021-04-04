@@ -15,6 +15,7 @@ import br.gov.br.fatec.springbootapp.entity.Apartamento;
 import br.gov.br.fatec.springbootapp.repository.ApartamentoRepository;
 import br.gov.br.fatec.springbootapp.entity.Morador;
 import br.gov.br.fatec.springbootapp.repository.MoradorRepository;
+import br.gov.br.fatec.springbootapp.service.SegurancaService;
 
 @SpringBootTest
 @Transactional
@@ -26,6 +27,9 @@ class SpringBootAppApplicationTests {
 
     @Autowired
     private ApartamentoRepository apartamentoRep;
+
+    @Autowired
+    private SegurancaService segService;
 
 	@Test
 	void contextLoads() {
@@ -104,5 +108,11 @@ class SpringBootAppApplicationTests {
     void testBuscaMoradorUnidade() {
         List<Morador> morador = moradorRep.findByApartamentosUnidade("A00");
         assertFalse(morador.isEmpty());
+    }
+
+    @Test
+    void testSeviceCriarMorador() {
+        Morador morador = segService.criarMorador("12345678909", "Test", "(12)91234-5678)", "test@test.com", "pass123", "B13", 23);
+        assertNotNull(morador);
     }
 }
