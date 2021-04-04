@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "moradores")
@@ -37,6 +39,7 @@ public class Morador {
     private String senha;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "moradores")
+    @JsonIgnore
     private Set<Apartamento> apartamentos;
 
     public Long getId() {

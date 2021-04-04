@@ -1,6 +1,7 @@
 package br.gov.br.fatec.springbootapp.service;
 
 import java.util.HashSet;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,6 @@ public class SegurancaServiceImpl implements SegurancaService {
     @Autowired
     private MoradorRepository moradorRep;
 
-    @Override
     @Transactional
     public Morador criarMorador(String cpf, String nome, String telefone, String email, String senha, String unidade, Integer garagem) {
         Apartamento ap = apartamentoRep.findByUnidade(unidade);
@@ -40,7 +40,15 @@ public class SegurancaServiceImpl implements SegurancaService {
         morador.getApartamentos().add(ap);
         moradorRep.save(morador);
         return morador;
-        
     }
-    
+
+    @Override
+    public List<Morador> buscarTodosMoradores() {
+        return moradorRep.findAll();
+    }
+
+    @Override
+    public List<Apartamento> buscarTodosApartamentos() {
+        return apartamentoRep.findAll();
+    }
 }
