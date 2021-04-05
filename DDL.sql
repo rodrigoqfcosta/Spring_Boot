@@ -9,7 +9,7 @@ grant select, insert, delete, update on condominio.* to adm@localhost;
 CREATE TABLE IF NOT EXISTS apartamentos (
   ap_id BIGINT NOT NULL AUTO_INCREMENT,
   ap_unidade VARCHAR(10) NOT NULL,
-  ap_garagem INT NOT NULL,
+  ap_garagem INT NULL,
   PRIMARY KEY (ap_id),
   UNIQUE KEY uni_apartamento_unidade (ap_unidade)
 );

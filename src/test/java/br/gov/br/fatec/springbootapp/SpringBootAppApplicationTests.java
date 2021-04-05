@@ -111,6 +111,12 @@ class SpringBootAppApplicationTests {
     }
 
     @Test
+    void testBuscaApartamentoCpf() {
+        List<Apartamento> ap = apartamentoRep.findByMoradoresCpf("12345678900");
+        assertFalse(ap.isEmpty());
+    }
+
+    @Test
     void testSeviceCriarMorador() {
         Morador morador = segService.criarMorador("12345678909", "Test", "(12)91234-5678)", "test@test.com", "pass123", "B13", 23);
         assertNotNull(morador);
