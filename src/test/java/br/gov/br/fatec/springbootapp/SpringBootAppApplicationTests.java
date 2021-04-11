@@ -15,7 +15,7 @@ import br.gov.br.fatec.springbootapp.entity.Apartamento;
 import br.gov.br.fatec.springbootapp.repository.ApartamentoRepository;
 import br.gov.br.fatec.springbootapp.entity.Morador;
 import br.gov.br.fatec.springbootapp.repository.MoradorRepository;
-import br.gov.br.fatec.springbootapp.service.SegurancaService;
+import br.gov.br.fatec.springbootapp.service.CreateService;
 
 @SpringBootTest
 @Transactional
@@ -29,7 +29,7 @@ class SpringBootAppApplicationTests {
     private ApartamentoRepository apartamentoRep;
 
     @Autowired
-    private SegurancaService segService;
+    private CreateService creService;
 
 	@Test
 	void contextLoads() {
@@ -118,7 +118,7 @@ class SpringBootAppApplicationTests {
 
     @Test
     void testSeviceCriarMorador() {
-        Morador morador = segService.criarMorador("12345678909", "Test", "(12)91234-5678)", "test@test.com", "pass123", "B13", 23);
+        Morador morador = creService.criarMorador("12345678909", "Test", "(12)91234-5678)", "test@test.com", "pass123", "B13", 23);
         assertNotNull(morador);
     }
 }

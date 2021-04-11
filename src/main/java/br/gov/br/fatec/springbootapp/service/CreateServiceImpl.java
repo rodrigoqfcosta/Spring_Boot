@@ -12,8 +12,8 @@ import br.gov.br.fatec.springbootapp.entity.Morador;
 import br.gov.br.fatec.springbootapp.repository.ApartamentoRepository;
 import br.gov.br.fatec.springbootapp.repository.MoradorRepository;
 
-@Service("segurancaService")
-public class SegurancaServiceImpl implements SegurancaService {
+@Service("createService")
+public class CreateServiceImpl implements CreateService {
 
     @Autowired
     private ApartamentoRepository apartamentoRep;

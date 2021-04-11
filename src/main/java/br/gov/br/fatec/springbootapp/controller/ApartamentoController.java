@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.gov.br.fatec.springbootapp.entity.Apartamento;
-import br.gov.br.fatec.springbootapp.service.SegurancaService;
+import br.gov.br.fatec.springbootapp.service.CreateService;
 
 @RestController
 @RequestMapping(value="/apartamentos")
@@ -17,10 +17,10 @@ import br.gov.br.fatec.springbootapp.service.SegurancaService;
 public class ApartamentoController {
     
     @Autowired
-    private SegurancaService segurancaService;
+    private CreateService createService;
 
     @GetMapping
     public List<Apartamento> buscarTodos() {
-        return segurancaService.buscarTodosApartamentos();
+        return createService.buscarTodosApartamentos();
     }
 }

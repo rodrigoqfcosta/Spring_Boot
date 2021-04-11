@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.gov.br.fatec.springbootapp.entity.Morador;
-import br.gov.br.fatec.springbootapp.service.SegurancaService;
+import br.gov.br.fatec.springbootapp.service.CreateService;
 
 @RestController
-@RequestMapping(value="/morador")
+@RequestMapping(value="/moradores")
 @CrossOrigin
 public class MoradorController {
 
     @Autowired
-    private SegurancaService segurancaService;
+    private CreateService createService;
 
     @GetMapping
     public List<Morador> buscarTodos() {
-        return segurancaService.buscarTodosMoradores();
+        return createService.buscarTodosMoradores();
     }
         
 }
