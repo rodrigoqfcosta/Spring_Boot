@@ -87,6 +87,12 @@ class SpringBootAppApplicationTests {
     }
 
     @Test
+    void testBuscaMoradorNomeQuery() {
+        Morador morador = moradorRep.buscaPorNome("Usuario Teste");
+        assertNotNull(morador);
+    }
+
+    @Test
     void testBuscaMoradorCpf() {
         Morador morador = moradorRep.findByCpf("12345678900");
         assertNotNull(morador);
@@ -111,6 +117,12 @@ class SpringBootAppApplicationTests {
     }
 
     @Test
+    void testBuscaMoradorUnidadeQuery() {
+        List<Morador> morador = moradorRep.buscaMoradorUnidade("A00");
+        assertFalse(morador.isEmpty());
+    }
+
+    @Test
     void testBuscaApartamentoCpf() {
         List<Apartamento> ap = apartamentoRep.findByMoradoresCpf("12345678900");
         assertFalse(ap.isEmpty());
@@ -121,4 +133,5 @@ class SpringBootAppApplicationTests {
         Morador morador = creService.criarMorador("12345678909", "Test", "(12)91234-5678)", "test@test.com", "pass123", "B13", 23);
         assertNotNull(morador);
     }
+
 }
