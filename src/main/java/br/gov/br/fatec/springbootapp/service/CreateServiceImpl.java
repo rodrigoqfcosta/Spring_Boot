@@ -2,6 +2,7 @@ package br.gov.br.fatec.springbootapp.service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class CreateServiceImpl implements CreateService {
     private MoradorRepository moradorRep;
 
     @Transactional
-    public Morador criarMorador(String cpf, String nome, String telefone, String email, String senha, String unidade, Integer garagem) {
+    public Morador criarMoradorInApartamento(String cpf, String nome, String telefone, String email, String senha, String unidade, Integer garagem) {
         Apartamento ap = apartamentoRep.findByUnidade(unidade);
         if(ap == null) {
             ap = new Apartamento();
@@ -40,6 +41,58 @@ public class CreateServiceImpl implements CreateService {
         morador.getApartamentos().add(ap);
         moradorRep.save(morador);
         return morador;
+    }
+
+    @Override
+    public Morador criarMorador(String cpf, String nome, String telefone, String email, String senha) {
+        Morador morador = new Morador();
+        morador.setCpf(cpf);
+        morador.setNome(nome);
+        morador.setTelefone(telefone);
+        morador.setEmail(email);
+        morador.setSenha(senha);
+        moradorRep.save(morador);
+        return morador;
+    }
+
+    @Override
+    public Apartamento criarApartamento(String unidade, Integer garagem) {
+        Apartamento ap = apartamentoRep.findByUnidade(unidade);
+        if(ap == null) {
+            ap = new Apartamento();
+            ap.setUnidade(unidade);
+            ap.setGaragem(garagem);
+            apartamentoRep.save(ap);
+        }
+        return ap;
+    }
+
+    @Override
+    public Morador buscarMoradorPorId(Long id) {
+        Optional<Morador> moradorOp = moradorRep.findById(id);
+        if(moradorOp.isPresent()) {
+            return moradorOp.get();
+        }
+        throw new RuntimeException("Morador não encontrado!");
+    }
+
+    @Override
+    public Morador buscarMoradorPorNome(String nome) {
+        Morador morador = moradorRep.findByNome(nome);
+        if(morador != null) {
+            return morador;
+        }
+        throw new RuntimeException("Morador não encontrado!");
+    }
+
+    
+    @Override
+    public Apartamento buscarApartamentoPorUnidade(String unidade) {
+        Apartamento ap = apartamentoRep.findByUnidade(unidade);
+        if(ap != null) {
+            return ap;
+        }
+        throw new RuntimeException("Apartamento não encontrado!");
     }
 
     @Override
