@@ -13,6 +13,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import br.gov.br.fatec.springbootapp.controller.View;
+
 
 @Entity
 @Table(name = "apartamentos")
@@ -23,12 +27,15 @@ public class Apartamento {
     @Column(name = "ap_id")
     private Long id;
     
+    @JsonView({View.Apartamento.class, View.Morador.class})
     @Column(name = "ap_unidade")
     private String unidade;
 
+    @JsonView(View.Apartamento.class)
     @Column(name = "ap_garagem")
     private Integer garagem;
 
+    @JsonView(View.Apartamento.class)
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "moradores_in_apartamentos", 
         joinColumns = { @JoinColumn(name = "ap_id")},

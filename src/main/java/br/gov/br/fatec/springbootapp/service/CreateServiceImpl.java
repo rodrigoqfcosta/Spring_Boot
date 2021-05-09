@@ -45,13 +45,16 @@ public class CreateServiceImpl implements CreateService {
 
     @Override
     public Morador criarMorador(String cpf, String nome, String telefone, String email, String senha) {
-        Morador morador = new Morador();
-        morador.setCpf(cpf);
-        morador.setNome(nome);
-        morador.setTelefone(telefone);
-        morador.setEmail(email);
-        morador.setSenha(senha);
-        moradorRep.save(morador);
+        Morador morador = moradorRep.findByCpf(cpf);
+        if(morador == null) {
+            morador = new Morador();
+            morador.setCpf(cpf);
+            morador.setNome(nome);
+            morador.setTelefone(telefone);
+            morador.setEmail(email);
+            morador.setSenha(senha);
+            moradorRep.save(morador);
+        }
         return morador;
     }
 
@@ -103,5 +106,20 @@ public class CreateServiceImpl implements CreateService {
     @Override
     public List<Apartamento> buscarTodosApartamentos() {
         return apartamentoRep.findAll();
+    }
+
+    @Override
+    public Morador deletarMorador(String cpf) {
+        Morador morador = moradorRep.findByCpf(cpf);
+        moradorRep.delete(morador);
+        System.out.println("Usuario deletado\n");
+        return null;
+    }
+
+    @Override
+    public Morador updateMoradorTelefone(String cpf, String telefone) {
+        Morador morador = moradorRep.findByCpf(cpf);
+        morador.setTelefone(telefone);
+        return morador;
     }
 }
