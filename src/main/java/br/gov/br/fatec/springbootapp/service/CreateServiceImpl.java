@@ -109,17 +109,17 @@ public class CreateServiceImpl implements CreateService {
     }
 
     @Override
-    public Morador deletarMorador(String cpf) {
+    public String deletarMorador(String cpf) {
         Morador morador = moradorRep.findByCpf(cpf);
         moradorRep.delete(morador);
-        System.out.println("Usuario deletado\n");
-        return null;
+        return "Usuario deletado";
     }
 
     @Override
     public Morador updateMoradorTelefone(String cpf, String telefone) {
         Morador morador = moradorRep.findByCpf(cpf);
         morador.setTelefone(telefone);
+        moradorRep.save(morador);
         return morador;
     }
 }

@@ -23,7 +23,7 @@ public interface CreateService {
 
     public Apartamento buscarApartamentoPorUnidade(String unidade);
 
-    public Morador deletarMorador(String cpf);
+    public String deletarMorador(String cpf);
 
     public Morador updateMoradorTelefone(String cpf, String telefone);
 

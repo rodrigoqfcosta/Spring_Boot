@@ -39,7 +39,7 @@ public class ApartamentoController {
     }
 
     @PostMapping(value = "/cadastro")
-    public Morador cadastraMoradorInApartamento(@RequestBody Morador morador) {
-        return createService.criarMoradorInApartamento(morador.getCpf(), morador.getNome(), morador.getTelefone(), morador.getEmail(), morador.getSenha(), "A00", 0);
+    public Morador cadastroMorador(@RequestBody Morador morador) {
+        return createService.criarMorador(morador.getCpf(), morador.getNome(), morador.getTelefone(), morador.getEmail(), morador.getSenha());
     }
 }

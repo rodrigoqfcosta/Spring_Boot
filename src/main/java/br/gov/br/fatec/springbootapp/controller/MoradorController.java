@@ -45,7 +45,7 @@ public class MoradorController {
 
     @JsonView(View.Morador.class)
     @DeleteMapping(value = "/delete")
-    public Morador deletarMorador(@RequestBody Morador morador) {
+    public String deletarMorador(@RequestBody Morador morador) {
         return createService.deletarMorador(morador.getCpf());
     }
 
