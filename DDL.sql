@@ -34,10 +34,10 @@ CREATE TABLE IF NOT EXISTS moradores_in_apartamentos (
 );
 
 
-insert into moradores(mor_cpf, mor_nome, mor_telefone, mor_email, mor_perfil, mor_senha) value ('12345678900', 'ADMIN Teste', '(12)91234-5678', 'user@admin.com', 'ROLE_ADMIN', 'pass123');
+insert into moradores(mor_cpf, mor_nome, mor_telefone, mor_email, mor_perfil, mor_senha) value ('12345678900', 'admin', '(12)91234-5678', 'user@admin.com', 'ROLE_ADMIN', '$2a$10$i3.Z8Yv1Fwl0I5SNjdCGkOTRGQjGvHjh/gMZhdc3e7LIovAklqM6C');
 insert into apartamentos(ap_unidade, ap_garagem) value ('A00', 0);
 insert into moradores_in_apartamentos values (1, 1);
 
-insert into moradores(mor_cpf, mor_nome, mor_telefone, mor_email, mor_perfil, mor_senha) value ('98765432100', 'USER Teste', '(13)99876-5432', 'user@user.com', 'USUARIO', 'pass123');
+insert into moradores(mor_cpf, mor_nome, mor_telefone, mor_email, mor_perfil, mor_senha) value ('98765432100', 'USER Teste', '(13)99876-5432', 'user@user.com', 'USUARIO', '$2a$10$i3.Z8Yv1Fwl0I5SNjdCGkOTRGQjGvHjh/gMZhdc3e7LIovAklqM6C');
 insert into apartamentos(ap_unidade, ap_garagem) value ('A01', 1);
 insert into moradores_in_apartamentos values (1, 2);

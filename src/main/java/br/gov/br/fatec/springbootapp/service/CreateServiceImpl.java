@@ -6,6 +6,10 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +27,9 @@ public class CreateServiceImpl implements CreateService {
     @Autowired
     private MoradorRepository moradorRep;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Transactional
     @PreAuthorize("isAuthenticated()")
     public Morador criarMoradorInApartamento(String cpf, String nome, String telefone, String email, String perfil, String senha, String unidade, Integer garagem) {
@@ -38,7 +45,7 @@ public class CreateServiceImpl implements CreateService {
         morador.setNome(nome);
         morador.setTelefone(telefone);
         morador.setEmail(email);
-        morador.setSenha(senha);
+        morador.setSenha(passwordEncoder.encode(senha));
         morador.setApartamentos(new HashSet<Apartamento>());
         morador.getApartamentos().add(ap);
         moradorRep.save(morador);
@@ -56,7 +63,7 @@ public class CreateServiceImpl implements CreateService {
             morador.setTelefone(telefone);
             morador.setEmail(email);
             morador.setPerfil(perfil);
-            morador.setSenha(senha);
+            morador.setSenha(passwordEncoder.encode(senha));
             moradorRep.save(morador);
         }
         return morador;
@@ -107,7 +114,7 @@ public class CreateServiceImpl implements CreateService {
     }
 
     @Override
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<Morador> buscarTodosMoradores() {
         return moradorRep.findAll();
     }
@@ -133,5 +140,15 @@ public class CreateServiceImpl implements CreateService {
         morador.setTelefone(telefone);
         moradorRep.save(morador);
         return morador;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Morador morador = moradorRep.findByNome(username);
+        if(morador == null) {
+            throw new UsernameNotFoundException("Usuario " + username + "não encontrado!!!");
+        }
+        return User.builder().username(username).password(morador.getSenha())
+            .authorities(morador.getPerfil()).build();
     }
 }

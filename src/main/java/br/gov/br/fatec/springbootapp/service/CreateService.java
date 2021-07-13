@@ -2,10 +2,12 @@ package br.gov.br.fatec.springbootapp.service;
 
 import java.util.List;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
+
 import br.gov.br.fatec.springbootapp.entity.Apartamento;
 import br.gov.br.fatec.springbootapp.entity.Morador;
 
-public interface CreateService {
+public interface CreateService extends UserDetailsService {
 
     public Morador criarMoradorInApartamento(String cpf, String nome, String telefone, String email, String perfil, String senha, String unidade, Integer garagem);
     
