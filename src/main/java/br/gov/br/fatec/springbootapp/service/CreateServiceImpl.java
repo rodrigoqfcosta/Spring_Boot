@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +24,8 @@ public class CreateServiceImpl implements CreateService {
     private MoradorRepository moradorRep;
 
     @Transactional
-    public Morador criarMoradorInApartamento(String cpf, String nome, String telefone, String email, String senha, String unidade, Integer garagem) {
+    @PreAuthorize("isAuthenticated()")
+    public Morador criarMoradorInApartamento(String cpf, String nome, String telefone, String email, String perfil, String senha, String unidade, Integer garagem) {
         Apartamento ap = apartamentoRep.findByUnidade(unidade);
         if(ap == null) {
             ap = new Apartamento();
@@ -44,7 +46,8 @@ public class CreateServiceImpl implements CreateService {
     }
 
     @Override
-    public Morador criarMorador(String cpf, String nome, String telefone, String email, String senha) {
+    @PreAuthorize("isAuthenticated()")
+    public Morador criarMorador(String cpf, String nome, String telefone, String email, String perfil, String senha) {
         Morador morador = moradorRep.findByCpf(cpf);
         if(morador == null) {
             morador = new Morador();
@@ -52,6 +55,7 @@ public class CreateServiceImpl implements CreateService {
             morador.setNome(nome);
             morador.setTelefone(telefone);
             morador.setEmail(email);
+            morador.setPerfil(perfil);
             morador.setSenha(senha);
             moradorRep.save(morador);
         }
@@ -59,6 +63,7 @@ public class CreateServiceImpl implements CreateService {
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public Apartamento criarApartamento(String unidade, Integer garagem) {
         Apartamento ap = apartamentoRep.findByUnidade(unidade);
         if(ap == null) {
@@ -71,6 +76,7 @@ public class CreateServiceImpl implements CreateService {
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public Morador buscarMoradorPorId(Long id) {
         Optional<Morador> moradorOp = moradorRep.findById(id);
         if(moradorOp.isPresent()) {
@@ -80,6 +86,7 @@ public class CreateServiceImpl implements CreateService {
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public Morador buscarMoradorPorNome(String nome) {
         Morador morador = moradorRep.findByNome(nome);
         if(morador != null) {
@@ -90,6 +97,7 @@ public class CreateServiceImpl implements CreateService {
 
     
     @Override
+    @PreAuthorize("isAuthenticated()")
     public Apartamento buscarApartamentoPorUnidade(String unidade) {
         Apartamento ap = apartamentoRep.findByUnidade(unidade);
         if(ap != null) {
@@ -99,16 +107,19 @@ public class CreateServiceImpl implements CreateService {
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public List<Morador> buscarTodosMoradores() {
         return moradorRep.findAll();
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public List<Apartamento> buscarTodosApartamentos() {
         return apartamentoRep.findAll();
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public String deletarMorador(String cpf) {
         Morador morador = moradorRep.findByCpf(cpf);
         moradorRep.delete(morador);
@@ -116,6 +127,7 @@ public class CreateServiceImpl implements CreateService {
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public Morador updateMoradorTelefone(String cpf, String telefone) {
         Morador morador = moradorRep.findByCpf(cpf);
         morador.setTelefone(telefone);

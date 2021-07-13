@@ -41,6 +41,10 @@ public class Morador {
     @Column(name = "mor_email")
     private String email;
 
+    @JsonView({View.Morador.class, View.Apartamento.class})
+    @Column(name = "mor_perfil")
+    private String perfil;
+
     @Column(name = "mor_senha")
     private String senha;
 
@@ -81,6 +85,13 @@ public class Morador {
     }
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPerfil() {
+        return this.perfil;
+    }
+    public void setPerfil(String perfil) {
+        this.perfil = perfil;
     }
 
     public String getSenha() {

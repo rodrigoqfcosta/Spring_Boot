@@ -7,9 +7,9 @@ import br.gov.br.fatec.springbootapp.entity.Morador;
 
 public interface CreateService {
 
-    public Morador criarMoradorInApartamento(String cpf, String nome, String telefone, String email, String senha, String unidade, Integer garagem);
+    public Morador criarMoradorInApartamento(String cpf, String nome, String telefone, String email, String perfil, String senha, String unidade, Integer garagem);
     
-    public Morador criarMorador(String cpf, String nome, String telefone, String email, String senha);
+    public Morador criarMorador(String cpf, String nome, String telefone, String email, String perfil, String senha);
 
     public Apartamento criarApartamento(String unidade, Integer garagem);
     

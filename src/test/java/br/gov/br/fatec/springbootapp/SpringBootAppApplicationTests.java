@@ -130,7 +130,7 @@ class SpringBootAppApplicationTests {
 
     @Test
     void testSeviceCriarMorador() {
-        Morador morador = creService.criarMorador("12345678909", "Test", "(12)91234-5678)", "test@test.com", "pass123");
+        Morador morador = creService.criarMorador("12345678909", "Test", "(12)91234-5678)", "test@test.com", "ROLE_ADMIN", "pass123");
         assertNotNull(morador);
     }
 
