@@ -82,13 +82,13 @@ class SpringBootAppApplicationTests {
 
     @Test
     void testBuscaMoradorNome() {
-        Morador morador = moradorRep.findByNome("Usuario Teste");
+        Morador morador = moradorRep.findByNome("USER Teste");
         assertNotNull(morador);
     }
 
     @Test
     void testBuscaMoradorNomeQuery() {
-        Morador morador = moradorRep.buscaPorNome("Usuario Teste");
+        Morador morador = moradorRep.buscaPorNome("admin");
         assertNotNull(morador);
     }
 
@@ -100,13 +100,13 @@ class SpringBootAppApplicationTests {
 
     @Test
     void testBuscaMoradorNomeCpf() {
-        Morador morador = moradorRep.findByNomeAndCpf("Usuario Teste", "12345678900");
+        Morador morador = moradorRep.findByNomeAndCpf("USER Teste", "98765432100");
         assertNotNull(morador);
     }
 
     @Test
     void testBuscaMoradorCpfSenha() {
-        Morador morador = moradorRep.findByCpfAndSenha("12345678900", "pass123");
+        Morador morador = moradorRep.findByCpfAndSenha("98765432100", "$2a$10$i3.Z8Yv1Fwl0I5SNjdCGkOTRGQjGvHjh/gMZhdc3e7LIovAklqM6C");
         assertNotNull(morador);
     }
 
