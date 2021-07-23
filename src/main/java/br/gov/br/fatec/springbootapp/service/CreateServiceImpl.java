@@ -31,7 +31,7 @@ public class CreateServiceImpl implements CreateService {
     private PasswordEncoder passwordEncoder;
 
     @Transactional
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Morador criarMoradorInApartamento(String cpf, String nome, String telefone, String email, String perfil, String senha, String unidade, Integer garagem) {
         Apartamento ap = apartamentoRep.findByUnidade(unidade);
         if(ap == null) {
@@ -53,7 +53,7 @@ public class CreateServiceImpl implements CreateService {
     }
 
     @Override
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Morador criarMorador(String cpf, String nome, String telefone, String email, String perfil, String senha) {
         Morador morador = moradorRep.findByCpf(cpf);
         if(morador == null) {
@@ -70,7 +70,7 @@ public class CreateServiceImpl implements CreateService {
     }
 
     @Override
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Apartamento criarApartamento(String unidade, Integer garagem) {
         Apartamento ap = apartamentoRep.findByUnidade(unidade);
         if(ap == null) {
@@ -83,7 +83,7 @@ public class CreateServiceImpl implements CreateService {
     }
 
     @Override
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Morador buscarMoradorPorId(Long id) {
         Optional<Morador> moradorOp = moradorRep.findById(id);
         if(moradorOp.isPresent()) {
@@ -93,7 +93,7 @@ public class CreateServiceImpl implements CreateService {
     }
 
     @Override
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'USUARIO')")
     public Morador buscarMoradorPorNome(String nome) {
         Morador morador = moradorRep.findByNome(nome);
         if(morador != null) {
@@ -104,7 +104,7 @@ public class CreateServiceImpl implements CreateService {
 
     
     @Override
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'USUARIO')")
     public Apartamento buscarApartamentoPorUnidade(String unidade) {
         Apartamento ap = apartamentoRep.findByUnidade(unidade);
         if(ap != null) {
@@ -114,19 +114,19 @@ public class CreateServiceImpl implements CreateService {
     }
 
     @Override
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'USUARIO')")
     public List<Morador> buscarTodosMoradores() {
         return moradorRep.findAll();
     }
 
     @Override
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'USUARIO')")
     public List<Apartamento> buscarTodosApartamentos() {
         return apartamentoRep.findAll();
     }
 
     @Override
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String deletarMorador(String cpf) {
         Morador morador = moradorRep.findByCpf(cpf);
         moradorRep.delete(morador);
@@ -134,7 +134,7 @@ public class CreateServiceImpl implements CreateService {
     }
 
     @Override
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Morador updateMoradorTelefone(String cpf, String telefone) {
         Morador morador = moradorRep.findByCpf(cpf);
         morador.setTelefone(telefone);
