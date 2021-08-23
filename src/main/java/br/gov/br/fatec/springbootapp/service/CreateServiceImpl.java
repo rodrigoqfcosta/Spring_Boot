@@ -93,7 +93,7 @@ public class CreateServiceImpl implements CreateService {
     }
 
     @Override
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'USUARIO')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public Morador buscarMoradorPorNome(String nome) {
         Morador morador = moradorRep.findByNome(nome);
         if(morador != null) {
@@ -104,7 +104,7 @@ public class CreateServiceImpl implements CreateService {
 
     
     @Override
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'USUARIO')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public Apartamento buscarApartamentoPorUnidade(String unidade) {
         Apartamento ap = apartamentoRep.findByUnidade(unidade);
         if(ap != null) {
@@ -114,13 +114,13 @@ public class CreateServiceImpl implements CreateService {
     }
 
     @Override
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'USUARIO')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public List<Morador> buscarTodosMoradores() {
         return moradorRep.findAll();
     }
 
     @Override
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'USUARIO')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public List<Apartamento> buscarTodosApartamentos() {
         return apartamentoRep.findAll();
     }
