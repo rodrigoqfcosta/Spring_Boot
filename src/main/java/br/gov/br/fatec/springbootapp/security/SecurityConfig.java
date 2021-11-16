@@ -14,24 +14,31 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+
+@EnableWebSecurity // Configurações de segurança padrão
+@EnableGlobalMethodSecurity(prePostEnabled = true) // Habilitando segurança por @notação
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserDetailsService userDetailsService; // Serviço para busca de usuario
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+        // O metodo de segurança CSRF(), faz com que a pagina web ao receber um token, o Spring-Security retorna o token como resposta
+        http.csrf().disable()
+        // Adicionar o filtro de requisições Antes da inicialização do Spring-security
+        .addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class) 
+        // Modo STATELESS, não guarda as informações segurança realizando o logout
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
+    // Buscando dados do usuario no banco de dados
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
     auth.userDetailsService(userDetailsService);
-  }
+    }
     
+    // Configuração do hash - BCrypt
     @Bean
     public PasswordEncoder passwordEncoderBean() {
         return new BCryptPasswordEncoder();
