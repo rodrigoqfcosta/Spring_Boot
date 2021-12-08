@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.gov.br.fatec.springbootapp.entity.Morador;
 import br.gov.br.fatec.springbootapp.security.JwtUtils;
 import br.gov.br.fatec.springbootapp.security.Login;
+import br.gov.br.fatec.springbootapp.service.CreateService;
 
 @RestController
 @RequestMapping(value = "/login")
@@ -25,7 +27,7 @@ public class LoginController {
 
   @PostMapping()
   public Login autenticar(@RequestBody Login login) throws JsonProcessingException {
-    Authentication auth = new UsernamePasswordAuthenticationToken(login.getUsername(), login.getPassword());
+    Authentication auth = new UsernamePasswordAuthenticationToken(login.getEmail(), login.getPassword());
     auth = authManager.authenticate(auth);
     login.setPassword(null);
     login.setToken(JwtUtils.generateToken(auth));

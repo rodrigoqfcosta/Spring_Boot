@@ -23,7 +23,7 @@ public class JwtUtils {
     public static String generateToken(Authentication usuario) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         Login usuarioSemSenha = new Login();
-        usuarioSemSenha.setUsername(usuario.getName());
+        usuarioSemSenha.setEmail(usuario.getName());
         if (!usuario.getAuthorities().isEmpty()) {
             usuarioSemSenha.setPerfil(usuario.getAuthorities().iterator().next().getAuthority());
         }
@@ -42,12 +42,18 @@ public class JwtUtils {
         String credentialsJson = Jwts.parser()
                                 .setSigningKey(KEY)
                                 .parseClaimsJws(token)
-                                .getBody()
-                                .get("userDetails",String.class);
-
+                                .getBody().get("userDetails",String.class);
         Login usuario = mapper.readValue(credentialsJson, Login.class);
-        UserDetails userDetails = User.builder().username(usuario.getUsername()).password("secret").authorities(usuario.getPerfil()).build();
-        return new UsernamePasswordAuthenticationToken(usuario.getUsername(), usuario.getPassword(), userDetails.getAuthorities());
+        
+        UserDetails userDetails = User.builder()
+                    .username(usuario.getEmail())
+                    .password("secret")
+                    .authorities(usuario.getPerfil())
+                    .build();
+
+        return new UsernamePasswordAuthenticationToken(usuario.getEmail(), 
+                                                       usuario.getPassword(), 
+                                                       userDetails.getAuthorities());
     }
 
 }

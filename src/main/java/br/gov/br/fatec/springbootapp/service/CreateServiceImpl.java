@@ -83,11 +83,21 @@ public class CreateServiceImpl implements CreateService {
     }
 
     @Override
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     public Morador buscarMoradorPorId(Long id) {
         Optional<Morador> moradorOp = moradorRep.findById(id);
         if(moradorOp.isPresent()) {
             return moradorOp.get();
+        }
+        throw new RuntimeException("Morador não encontrado!");
+    }
+
+    @Override
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
+    public Morador buscarMoradorPorEmail(String email) {
+        Morador moradorOp = moradorRep.findByEmail(email);
+        if(moradorOp != null) {
+            return moradorOp;
         }
         throw new RuntimeException("Morador não encontrado!");
     }
@@ -143,12 +153,12 @@ public class CreateServiceImpl implements CreateService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Morador morador = moradorRep.findByNome(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Morador morador = moradorRep.findByEmail(email);
         if(morador == null) {
-            throw new UsernameNotFoundException("Usuario " + username + "não encontrado!!!");
+            throw new UsernameNotFoundException("Usuario " + email + "não encontrado!!!");
         }
-        return User.builder().username(username).password(morador.getSenha())
+        return User.builder().username(email).password(morador.getSenha())
             .authorities(morador.getPerfil()).build();
     }
 }

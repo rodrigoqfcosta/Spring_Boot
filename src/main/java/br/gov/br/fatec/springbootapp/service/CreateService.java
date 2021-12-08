@@ -21,6 +21,8 @@ public interface CreateService extends UserDetailsService {
 
     public Morador buscarMoradorPorId(Long id);
 
+    public Morador buscarMoradorPorEmail(String email);
+
     public Morador buscarMoradorPorNome(String nome);
 
     public Apartamento buscarApartamentoPorUnidade(String unidade);

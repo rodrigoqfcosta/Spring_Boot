@@ -38,6 +38,12 @@ public class MoradorController {
     }
 
     @JsonView(View.Morador.class)
+    @GetMapping(value = "/user/{email}")
+    public Morador buscarPorEmail(@PathVariable("email") String email) {
+        return createService.buscarMoradorPorEmail(email);
+    }
+
+    @JsonView(View.Morador.class)
     @GetMapping(value = "/nome/{nome}")
     public Morador buscarPorNome(@PathVariable("nome") String nome) {
         return createService.buscarMoradorPorNome(nome);

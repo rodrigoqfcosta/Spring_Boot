@@ -20,8 +20,8 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
         try {
-            HttpServletRequest servletRequest = (HttpServletRequest) request; // Pegando a autorização
-            String authorization = servletRequest.getHeader(HttpHeaders.AUTHORIZATION); // Pegando o Header do token da requisição
+            HttpServletRequest servletRequest = (HttpServletRequest) request; // Recuperando o request realizado 
+            String authorization = servletRequest.getHeader(HttpHeaders.AUTHORIZATION); // Pegando a autorização no Header AUTHORIZATION
             if (authorization != null) {
                 Authentication credentials = JwtUtils.parseToken(authorization.replaceAll("Bearer ", "")); // Abrindo token para validação
                 SecurityContextHolder.getContext().setAuthentication(credentials); // Validando token e retornando objeto do tipo Authentication 

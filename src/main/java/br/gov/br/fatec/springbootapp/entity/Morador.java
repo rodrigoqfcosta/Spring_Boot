@@ -22,6 +22,7 @@ public class Morador {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView(View.Morador.class)
     @Column(name = "mor_id")
     private Long id;
 

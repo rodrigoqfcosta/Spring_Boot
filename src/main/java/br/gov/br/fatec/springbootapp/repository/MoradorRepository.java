@@ -13,6 +13,8 @@ public interface MoradorRepository extends JpaRepository<Morador, Long>{
 
     public Morador findByNome(String nome);
 
+    public Morador findByEmail(String email);
+
     @Query("select m from Morador m where m.nome = ?1")
     public Morador buscaPorNome(String nome);
 
