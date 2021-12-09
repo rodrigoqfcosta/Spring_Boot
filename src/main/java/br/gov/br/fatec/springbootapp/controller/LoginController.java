@@ -1,5 +1,7 @@
 package br.gov.br.fatec.springbootapp.controller;
 
+import java.util.List;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.gov.br.fatec.springbootapp.entity.Morador;
 import br.gov.br.fatec.springbootapp.security.JwtUtils;
 import br.gov.br.fatec.springbootapp.security.Login;
-import br.gov.br.fatec.springbootapp.service.CreateService;
 
 @RestController
 @RequestMapping(value = "/login")
@@ -31,6 +31,8 @@ public class LoginController {
     auth = authManager.authenticate(auth);
     login.setPassword(null);
     login.setToken(JwtUtils.generateToken(auth));
+    login.setPerfil(auth.getAuthorities().iterator().next().getAuthority());
+
     return login;
   }
   
