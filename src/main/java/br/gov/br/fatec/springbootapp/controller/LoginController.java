@@ -1,7 +1,5 @@
 package br.gov.br.fatec.springbootapp.controller;
 
-import java.util.List;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
